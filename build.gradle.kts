@@ -90,4 +90,6 @@ tasks.named<Copy>("jvmProcessResources") {
 tasks.named<JavaExec>("run") {
     dependsOn(tasks.named<Jar>("jvmJar"))
     classpath(tasks.named<Jar>("jvmJar"))
+
+    systemProperty("altline.insurance.httpLogging", false)
 }
