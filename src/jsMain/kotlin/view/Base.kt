@@ -21,12 +21,10 @@ class Base : RComponent<BaseProps, BaseState>() {
 
     override fun RBuilder.render() {
         div {
-            child(featureInput) {
-                attrs.onSubmit = { features ->
-                    props.coroutineScope.launch {
-                        val prediction = submitForPrediction(features)
-                        println(prediction)
-                    }
+            featureInput { features ->
+                props.coroutineScope.launch {
+                    val prediction = submitForPrediction(features)
+                    println(prediction)
                 }
             }
         }

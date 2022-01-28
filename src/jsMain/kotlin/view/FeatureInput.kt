@@ -61,6 +61,12 @@ val featureInput = fc<FeatureInputProps> { props ->
     }
 }
 
+fun RBuilder.featureInput(onSubmit: (Features) -> Unit) {
+    child(featureInput) {
+        attrs.onSubmit = onSubmit
+    }
+}
+
 private fun RBuilder.intInput(id: String, labelText: String, onChangeValue: (Int) -> Unit) {
     div {
         label {
