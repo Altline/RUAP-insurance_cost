@@ -5,32 +5,25 @@ import PredictionService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import react.Props
-import react.RBuilder
-import react.RComponent
-import react.State
 import react.dom.div
+import react.fc
+import react.useState
 
 external interface BaseProps : Props {
     var coroutineScope: CoroutineScope
     var predictionService: PredictionService
 }
 
-external interface BaseState : State
+val base = fc<BaseProps> { props ->
+    var scoredFeatures: Features? by useState(null)
 
-class Base : RComponent<BaseProps, BaseState>() {
-
-    override fun RBuilder.render() {
-        div {
-            featureInput { features ->
-                props.coroutineScope.launch {
-                    val prediction = submitForPrediction(features)
-                    println(prediction)
-                }
+    div {
+        featureInput { features ->
+            props.coroutineScope.launch {
+                val sf = props.predictionService.getPrediction(features)
+                scoredFeatures = sf
             }
         }
-    }
-
-    private suspend fun submitForPrediction(features: Features): Features {
-        return props.predictionService.getPrediction(features)
+        scoreView(scoredFeatures)
     }
 }

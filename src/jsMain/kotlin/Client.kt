@@ -2,11 +2,10 @@ import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import kotlinx.browser.document
-import kotlinx.browser.window
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import react.dom.render
-import view.Base
+import view.base
 
 private class Client {
     val coroutineScope = CoroutineScope(Dispatchers.Default)
@@ -17,13 +16,11 @@ private class Client {
     val predictionService = PredictionService(httpClient)
 
     fun start() {
-        window.onload = {
-            val root = document.getElementById("root")!!
-            render(root) {
-                child(Base::class) {
-                    attrs.coroutineScope = coroutineScope
-                    attrs.predictionService = predictionService
-                }
+        val root = document.getElementById("root")!!
+        render(root) {
+            child(base) {
+                attrs.coroutineScope = coroutineScope
+                attrs.predictionService = predictionService
             }
         }
     }
