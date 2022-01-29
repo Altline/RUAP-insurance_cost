@@ -13,13 +13,9 @@ class PredictionService {
     private val webService by lazy { retrofit.create(PredictionWebService::class.java) }
 
     suspend fun getPrediction(features: Features): Features? {
-        val requestBody = toRequestBody(features)
+        val requestBody = PredictionRequest.fromFeatures(features)
         val responseBody = webService.getPrediction(requestBody, authKey)
         return toFeatures(responseBody)
-    }
-
-    private fun toRequestBody(features: Features): PredictionRequest {
-        return PredictionRequest.fromFeatures(features)
     }
 
     private fun toFeatures(responseBody: PredictionResponse): Features? {

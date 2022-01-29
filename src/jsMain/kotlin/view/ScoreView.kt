@@ -6,6 +6,12 @@ import react.RBuilder
 import react.dom.div
 import react.fc
 
+fun RBuilder.scoreView(scoredFeatures: Features? = null) {
+    child(scoreView) {
+        attrs.scoredFeatures = scoredFeatures
+    }
+}
+
 external interface ScoreViewProps : Props {
     var scoredFeatures: Features?
 }
@@ -18,11 +24,5 @@ val scoreView = fc<ScoreViewProps> { props ->
     div {
         val scoreDeviation = props.scoredFeatures?.scoredLabelStandardDeviation?.toString() ?: "-"
         +"Score standard deviation $scoreDeviation"
-    }
-}
-
-fun RBuilder.scoreView(scoredFeatures: Features? = null) {
-    child(scoreView) {
-        attrs.scoredFeatures = scoredFeatures
     }
 }
