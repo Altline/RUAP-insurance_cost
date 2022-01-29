@@ -7,9 +7,20 @@ import kotlinx.html.js.onChangeFunction
 import org.w3c.dom.HTMLInputElement
 import react.Props
 import react.RBuilder
-import react.dom.*
+import react.dom.form
+import react.dom.input
+import react.dom.label
+import react.dom.onSubmit
 import react.fc
 import react.useState
+import styled.css
+import styled.styledDiv
+
+fun RBuilder.featureInput(onSubmit: (Features) -> Unit) {
+    child(featureInput) {
+        attrs.onSubmit = onSubmit
+    }
+}
 
 external interface FeatureInputProps : Props {
     var onSubmit: (Features) -> Unit
@@ -55,26 +66,27 @@ val featureInput = fc<FeatureInputProps> { props ->
             features.numberOfMajorSurgeries = it
         }
 
-        input(InputType.submit) {
-            attrs.value = "Submit"
+        styledDiv {
+            css { +Styles.submitBlock }
+
+            input(InputType.submit) {
+                attrs.value = "Submit"
+            }
         }
     }
 }
 
-fun RBuilder.featureInput(onSubmit: (Features) -> Unit) {
-    child(featureInput) {
-        attrs.onSubmit = onSubmit
-    }
-}
-
 private fun RBuilder.intInput(id: String, labelText: String, onChangeValue: (Int) -> Unit) {
-    div {
+    styledDiv {
+        css { +Styles.inputBlock }
+
         label {
             +labelText
             attrs.htmlFor = id
         }
         input(InputType.number) {
             attrs.id = id
+            attrs.placeholder = "0"
             attrs.onChangeFunction = { event ->
                 event.runCatching {
                     (event.target as HTMLInputElement).value.toInt()
@@ -87,7 +99,9 @@ private fun RBuilder.intInput(id: String, labelText: String, onChangeValue: (Int
 }
 
 private fun RBuilder.booleanInput(id: String, labelText: String, onChangeValue: (Boolean) -> Unit) {
-    div {
+    styledDiv {
+        css { +Styles.inputBlock }
+
         label {
             +labelText
             attrs.htmlFor = id
