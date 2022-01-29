@@ -4,7 +4,7 @@ import kotlinx.html.*
 
 fun HTML.index() {
     head {
-        title("Insurance prediction")
+        title("Insurance predictor")
     }
     body {
         div {
