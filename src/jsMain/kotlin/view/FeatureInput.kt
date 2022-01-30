@@ -38,10 +38,10 @@ val featureInput = fc<FeatureInputProps> { props ->
         intInput("age", "Age") {
             features.age = it
         }
-        intInput("height", "Height") {
+        intInput("height", "Height [cm]") {
             features.height = it
         }
-        intInput("weight", "Weight") {
+        intInput("weight", "Weight [kg]") {
             features.weight = it
         }
         booleanInput("allergies", "Known allergies") {
