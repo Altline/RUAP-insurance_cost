@@ -20,11 +20,11 @@ external interface ScoreViewProps : Props {
 val scoreView = fc<ScoreViewProps> { props ->
     div {
         val scoreMean = props.scoredFeatures?.scoredLabelMean?.rounded?.toString() ?: "-"
-        +"Score mean: $scoreMean"
+        +"Score mean: ₹$scoreMean"
     }
     div {
         val scoreDeviation = props.scoredFeatures?.scoredLabelStandardDeviation?.rounded?.toString() ?: "-"
-        +"Score standard deviation $scoreDeviation"
+        +"Score standard deviation ₹$scoreDeviation"
     }
 }
 
