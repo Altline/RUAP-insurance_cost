@@ -1,14 +1,14 @@
 val kotlinVersion: String by System.getProperties()
+
+val kotlinReactVersion = "17.0.2-pre.290-kotlin-1.6.10"
+val kotlinStyledVersion = "5.3.3-pre.290-kotlin-1.6.10"
+
 val ktorVersion = "1.6.7"
 val kotlinHtmlVersion = "0.7.3"
-val kotlinCoroutinesVersion = "1.6.0"
 val serializationVersion = "1.3.2"
 val retrofitVersion = "2.9.0"
 val okHttpLoggingInterceptorVersion = "4.9.3"
 val log4jVersion = "2.17.1"
-
-val kotlinReactVersion = "17.0.2-pre.290-kotlin-$kotlinVersion"
-val kotlinStyledVersion = "5.3.3-pre.290-kotlin-$kotlinVersion"
 
 plugins {
     val kotlinVersion: String by System.getProperties()
